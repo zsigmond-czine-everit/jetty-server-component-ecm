@@ -46,7 +46,7 @@ import aQute.bnd.annotation.headers.ProvideCapability;
  * ECM based configurable component that can start one or more {@link HttpConnectionFactory}s and
  * register them as OSGi services.
  */
-@Component(componentId = HttpConnectionFactoryFactoryConstants.FACTORY_PID,
+@Component(componentId = HttpConnectionFactoryFactoryConstants.SERVICE_FACTORY_PID,
     configurationPolicy = ConfigurationPolicy.FACTORY,
     label = "Everit Jetty HttpConnectionFactory Factory",
     description = "Component to create HTTPConnectionFactory instances.")
@@ -149,7 +149,7 @@ public class HttpConnectionFactoryFactoryComponent implements ConnectionFactoryF
   /**
    * Updates the customizers on the component and all connection factories dynamically.
    **/
-  @ServiceRef(referenceId = HttpConnectionFactoryFactoryConstants.SERVICE_REF_CUSTOMIZERS,
+  @ServiceRef(referenceId = HttpConnectionFactoryFactoryConstants.ATTR_CUSTOMIZERS,
       optional = true, dynamic = true, attributePriority = PriorityConstants.PRIORITY_01,
       label = "Customizers (target)",
       description = "Customizers are invoked for every request received. Customizers are often "

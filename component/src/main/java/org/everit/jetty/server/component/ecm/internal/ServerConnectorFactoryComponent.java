@@ -50,7 +50,7 @@ import aQute.bnd.annotation.headers.ProvideCapability;
  * ECM based configurable component that can set up and register {@link NetworkConnectorFactory}s.
  *
  */
-@Component(componentId = ServerConnectorFactoryConstants.FACTORY_PID,
+@Component(componentId = ServerConnectorFactoryConstants.SERVICE_FACTORY_PID,
     configurationPolicy = ConfigurationPolicy.FACTORY,
     label = "Everit Jetty Server Connector Factory")
 @ProvideCapability(ns = ECMExtenderConstants.CAPABILITY_NS_COMPONENT,
@@ -151,7 +151,7 @@ public class ServerConnectorFactoryComponent implements NetworkConnectorFactory 
   /**
    * Setter that also updates the property on the connector without restarting it.
    */
-  @IntegerAttribute(attributeId = ServerConnectorFactoryConstants.PROP_ACCEPTOR_PRIORITY_DELTA,
+  @IntegerAttribute(attributeId = ServerConnectorFactoryConstants.ATTR_ACCEPTOR_PRIORITY_DELTA,
       defaultValue = 0, dynamic = true, priority = PriorityConstants.PRIORITY_08,
       label = "Acceptor thread priority delta",
       description = "This allows the acceptor thread to run at a different priority. Typically "
@@ -168,7 +168,7 @@ public class ServerConnectorFactoryComponent implements NetworkConnectorFactory 
   /**
    * Setter that also updates the property on the connector without restarting it.
    */
-  @IntegerAttribute(attributeId = ServerConnectorFactoryConstants.PROP_ACCEPT_QUEUE_SIZE,
+  @IntegerAttribute(attributeId = ServerConnectorFactoryConstants.ATTR_ACCEPT_QUEUE_SIZE,
       defaultValue = 0, priority = PriorityConstants.PRIORITY_05, label = "Accept queue size",
       description = "The accept queue size (also known as accept backlog).")
   public synchronized void setAcceptQueueSize(final int acceptQueueSize) {
@@ -179,7 +179,7 @@ public class ServerConnectorFactoryComponent implements NetworkConnectorFactory 
    * Setter that also updates the property on the connector without restarting it.
    */
   @ServiceRef(
-      referenceId = ServerConnectorFactoryConstants.SERVICE_REF_CONNECTION_FACTORY_FACTORIES,
+      referenceId = ServerConnectorFactoryConstants.ATTR_CONNECTION_FACTORY_FACTORIES,
       dynamic = true, optional = true, attributePriority = PriorityConstants.PRIORITY_01,
       label = "ConnectionFactory factories (target)",
       description = "OSGi filter expressions that point to OSGi services that implement the "
@@ -202,7 +202,7 @@ public class ServerConnectorFactoryComponent implements NetworkConnectorFactory 
   /**
    * Setter that also updates the property on the connector without restarting it.
    */
-  @LongAttribute(attributeId = ServerConnectorFactoryConstants.PROP_IDLE_TIMEOUT,
+  @LongAttribute(attributeId = ServerConnectorFactoryConstants.ATTR_IDLE_TIMEOUT,
       defaultValue = ServerConnectorFactoryConstants.DEFAULT_IDLE_TIMEOUT, dynamic = true,
       priority = PriorityConstants.PRIORITY_02, label = "Idle timeout",
       description = "Sets the maximum Idle time for a connection. This value is interpreted as "
@@ -217,7 +217,7 @@ public class ServerConnectorFactoryComponent implements NetworkConnectorFactory 
 
   }
 
-  @BooleanAttribute(attributeId = ServerConnectorFactoryConstants.PROP_INHERIT_CHANNEL,
+  @BooleanAttribute(attributeId = ServerConnectorFactoryConstants.ATTR_INHERIT_CHANNEL,
       defaultValue = ServerConnectorFactoryConstants.DEFAULT_INHERIT_CHANNEL,
       priority = PriorityConstants.PRIORITY_06, label = "Inherit channel",
       description = "Whether this connector uses a channel inherited from the JVM. If true, the "
@@ -230,7 +230,7 @@ public class ServerConnectorFactoryComponent implements NetworkConnectorFactory 
     this.inheritChannel = inheritChannel;
   }
 
-  @IntegerAttribute(attributeId = ServerConnectorFactoryConstants.PROP_LINGER_TIME,
+  @IntegerAttribute(attributeId = ServerConnectorFactoryConstants.ATTR_LINGER_TIME,
       defaultValue = ServerConnectorFactoryConstants.DEFAULT_LINGER_TIME,
       priority = PriorityConstants.PRIORITY_07, label = "Linger time",
       description = "The linger time. Use -1 to disable.")
@@ -238,7 +238,7 @@ public class ServerConnectorFactoryComponent implements NetworkConnectorFactory 
     this.lingerTime = lingerTime;
   }
 
-  @StringAttribute(attributeId = ServerConnectorFactoryConstants.PROP_NAME, optional = true,
+  @StringAttribute(attributeId = ServerConnectorFactoryConstants.ATTR_NAME, optional = true,
       priority = PriorityConstants.PRIORITY_03, label = "Name",
       description = "Set a connector name. A context may be configured with virtual hosts in the "
           + "form \"@contextname\" and will only serve requests from the named connector.")
@@ -246,7 +246,7 @@ public class ServerConnectorFactoryComponent implements NetworkConnectorFactory 
     this.name = name;
   }
 
-  @BooleanAttribute(attributeId = ServerConnectorFactoryConstants.PROP_REUSE_ADDRESS,
+  @BooleanAttribute(attributeId = ServerConnectorFactoryConstants.ATTR_REUSE_ADDRESS,
       defaultValue = ServerConnectorFactoryConstants.DEFAULT_REUSE_ADDRESS,
       priority = PriorityConstants.PRIORITY_04, label = "Reuse address",
       description = "Whether the server socket reuses addresses.")
@@ -257,7 +257,7 @@ public class ServerConnectorFactoryComponent implements NetworkConnectorFactory 
   /**
    * Sets the selectorPriorityDelta on the component and every active connector.
    */
-  @IntegerAttribute(attributeId = ServerConnectorFactoryConstants.PROP_SELECTOR_PRIORITY_DELTA,
+  @IntegerAttribute(attributeId = ServerConnectorFactoryConstants.ATTR_SELECTOR_PRIORITY_DELTA,
       defaultValue = ServerConnectorFactoryConstants.DEFAULT_SELECTOR_PRIORITY_DELTA,
       dynamic = true, priority = PriorityConstants.PRIORITY_09, label = "Selector priority delta",
       description = "Sets the selector thread priority delta to the given amount. This allows the "

@@ -26,14 +26,14 @@ public final class SslConnectionFactoryFactoryConstants {
 
   public static final String ATTR_KEY_MANAGER_PASSWORD = "keyManagerPassword";
 
+  public static final String ATTR_KEYSTORE = "keyStore";
+
   public static final String ATTR_KEYSTORE_PASSWORD = "keyStorePassword";
 
   public static final String DEFAULT_KEYSTORE_PASSWORD = "changeit";
 
-  public static final String FACTORY_PID =
+  public static final String SERVICE_FACTORY_PID =
       "org.everit.jetty.server.component.ecm.SslConnectionFactoryFactory";
-
-  public static final String SERVICE_REF_KEYSTORE = "keyStore";
 
   private SslConnectionFactoryFactoryConstants() {
   }

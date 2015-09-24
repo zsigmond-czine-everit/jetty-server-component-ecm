@@ -55,7 +55,7 @@ import aQute.bnd.annotation.headers.ProvideCapability;
  * Configurable component that creates a {@link SessionHandler} based on {@link HashSessionManager}
  * implementation.
  */
-@Component(componentId = HashSessionHandlerFactoryConstants.FACTORY_PID,
+@Component(componentId = HashSessionHandlerFactoryConstants.SERVICE_FACTORY_PID,
     configurationPolicy = ConfigurationPolicy.FACTORY,
     label = "Everit Jetty Hash SessionHandler Factory")
 @ProvideCapability(ns = ECMExtenderConstants.CAPABILITY_NS_COMPONENT,
@@ -284,7 +284,7 @@ public class HashSessionHandlerFactoryComponent implements SessionHandlerFactory
     this.nodeIdInSessionId = nodeIdInSessionId;
   }
 
-  @ServiceRef(referenceId = SessionHandlerConstants.SERVICE_REF_RANDOM, optional = true,
+  @ServiceRef(referenceId = SessionHandlerConstants.ATTR_RANDOM, optional = true,
       attributePriority = PriorityConstants.PRIORITY_21, label = "Random (target)",
       description = "The random number generator for generating Session Ids.")
   public void setRandom(final Random random) {
@@ -336,7 +336,7 @@ public class HashSessionHandlerFactoryComponent implements SessionHandlerFactory
     this.secureRequestOnly = secureRequestOnly;
   }
 
-  @ServiceRef(referenceId = SessionHandlerConstants.SERVICE_REF_SESSION_ATTRIBUTE_LISTENERS,
+  @ServiceRef(referenceId = SessionHandlerConstants.ATTR_SESSION_ATTRIBUTE_LISTENERS,
       optional = true, attributePriority = PriorityConstants.PRIORITY_03,
       label = "Session attribute listeners (target)",
       description = "Zero or more filter expression for HttpSessionAttributeListener services")
@@ -345,7 +345,7 @@ public class HashSessionHandlerFactoryComponent implements SessionHandlerFactory
     this.sessionAttributeListeners = sessionAttributeListeners;
   }
 
-  @ServiceRef(referenceId = SessionHandlerConstants.SERVICE_REF_SESSION_ID_LISTENERS,
+  @ServiceRef(referenceId = SessionHandlerConstants.ATTR_SESSION_ID_LISTENERS,
       optional = true, attributePriority = PriorityConstants.PRIORITY_04,
       label = "Session Id listeners (target)",
       description = "Zero or more filter expression for HttpSessionIdListener services")
@@ -362,7 +362,7 @@ public class HashSessionHandlerFactoryComponent implements SessionHandlerFactory
     this.sessionIdParameterName = sessionIdParameterName;
   }
 
-  @ServiceRef(referenceId = SessionHandlerConstants.SERVICE_REF_SESSION_LISTENERS, optional = true,
+  @ServiceRef(referenceId = SessionHandlerConstants.ATTR_SESSION_LISTENERS, optional = true,
       attributePriority = PriorityConstants.PRIORITY_02, label = "Session listeners (target)",
       description = "Zero or more filter expression for HttpSessionListener services.")
   public void setSessionListeners(final HttpSessionListener[] sessionListeners) {

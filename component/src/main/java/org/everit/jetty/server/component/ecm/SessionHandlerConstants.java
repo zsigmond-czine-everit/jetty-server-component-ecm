@@ -37,6 +37,8 @@ public final class SessionHandlerConstants {
 
   public static final String ATTR_NODE_IN_SESSION_ID = "nodeIdInSessionId";
 
+  public static final String ATTR_RANDOM = "random";
+
   public static final String ATTR_REFRESH_COOKIE_AGE = "refreshCookieAge";
 
   public static final String ATTR_RESEED = "reseed";
@@ -46,6 +48,12 @@ public final class SessionHandlerConstants {
   public static final String ATTR_SCAVENGE_PERIOD = "scavengePeriod";
 
   public static final String ATTR_SECURE_REQUEST_ONLY = "secureRequestOnly";
+
+  public static final String ATTR_SESSION_ATTRIBUTE_LISTENERS = "sessionAttributeListeners";
+
+  public static final String ATTR_SESSION_ID_LISTENERS = "sessionIdListeners";
+
+  public static final String ATTR_SESSION_LISTENERS = "sessionListeners";
 
   public static final String ATTR_STORE_DIRECTORY = "storeDirectory";
 
@@ -82,14 +90,6 @@ public final class SessionHandlerConstants {
   public static final boolean DEFAULT_USING_COOKIES = true;
 
   public static final boolean DEFAULT_USING_URLS = false;
-
-  public static final String SERVICE_REF_RANDOM = "random";
-
-  public static final String SERVICE_REF_SESSION_ATTRIBUTE_LISTENERS = "sessionAttributeListeners";
-
-  public static final String SERVICE_REF_SESSION_ID_LISTENERS = "sessionIdListeners";
-
-  public static final String SERVICE_REF_SESSION_LISTENERS = "sessionListeners";
 
   public static final String SESSION_ID_PARAMETER_NAME = "sessionIdParameterName";
 

@@ -54,7 +54,7 @@ import aQute.bnd.annotation.headers.ProvideCapability;
 /**
  * ECM based configurable component that can start one or more Jetty {@link Server}s.
  */
-@Component(componentId = JettyServerConstants.FACTORY_PID,
+@Component(componentId = JettyServerConstants.SERVICE_FACTORY_PID,
     configurationPolicy = ConfigurationPolicy.FACTORY,
     label = "Everit Jetty Server",
     description = "Configurable component that can start Jetty server instances. In case a Jetty "
@@ -376,7 +376,7 @@ public class JettyServerComponent {
     }
   }
 
-  @ServiceRef(referenceId = JettyServerConstants.SERVICE_REF_NETWORK_CONNECTOR_FACTORIES,
+  @ServiceRef(referenceId = JettyServerConstants.ATTR_NETWORK_CONNECTOR_FACTORIES,
       configurationType = ReferenceConfigurationType.CLAUSE, optional = false, dynamic = true,
       attributePriority = PriorityConstants.PRIORITY_01,
       label = "NetworkConnector Factories (clause)",
@@ -387,7 +387,7 @@ public class JettyServerComponent {
     updateConnectorFactories(networkConnectorFactories);
   }
 
-  @ServiceRef(referenceId = JettyServerConstants.SERVICE_REF_SERVLET_CONTEXT_HANDLER_FACTORIES,
+  @ServiceRef(referenceId = JettyServerConstants.ATTR_SERVLET_CONTEXT_HANDLER_FACTORIES,
       configurationType = ReferenceConfigurationType.CLAUSE, dynamic = true,
       attributePriority = PriorityConstants.PRIORITY_02,
       label = "ServletContextHandler Factories (clause)",

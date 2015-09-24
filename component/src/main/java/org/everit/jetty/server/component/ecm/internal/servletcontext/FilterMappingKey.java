@@ -119,7 +119,7 @@ public class FilterMappingKey extends MappingKey<Filter> {
         } catch (IllegalArgumentException e) {
           throw new ConfigurationException(
               "Invalid dispatcherType in '"
-                  + ServletContextHandlerFactoryConstants.SERVICE_REF_FILTERS + "[" + filterName
+                  + ServletContextHandlerFactoryConstants.ATTR_FILTERS + "[" + filterName
                   + "]' configuration: "
                   + dispatcherTypeString,
               e);

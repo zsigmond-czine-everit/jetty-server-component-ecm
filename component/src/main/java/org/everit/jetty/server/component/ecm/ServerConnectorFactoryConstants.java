@@ -20,6 +20,25 @@ package org.everit.jetty.server.component.ecm;
  */
 public final class ServerConnectorFactoryConstants {
 
+  public static final String ATTR_ACCEPT_QUEUE_SIZE = "acceptQueueSize";
+
+  public static final String ATTR_ACCEPTOR_PRIORITY_DELTA = "acceptorPriorityDelta";
+
+  public static final String ATTR_CONNECTION_FACTORY_FACTORIES =
+      "connectionFactoryFactories";
+
+  public static final String ATTR_IDLE_TIMEOUT = "idleTimeout";
+
+  public static final String ATTR_INHERIT_CHANNEL = "inheritChannel";
+
+  public static final String ATTR_LINGER_TIME = "lingerTime";
+
+  public static final String ATTR_NAME = "name";
+
+  public static final String ATTR_REUSE_ADDRESS = "reuseAddress";
+
+  public static final String ATTR_SELECTOR_PRIORITY_DELTA = "selectorPriorityDelta";
+
   public static final long DEFAULT_IDLE_TIMEOUT = 30000;
 
   public static final boolean DEFAULT_INHERIT_CHANNEL = false;
@@ -30,27 +49,8 @@ public final class ServerConnectorFactoryConstants {
 
   public static final int DEFAULT_SELECTOR_PRIORITY_DELTA = 0;
 
-  public static final String FACTORY_PID =
+  public static final String SERVICE_FACTORY_PID =
       "org.everit.jetty.server.component.ecm.ServerConnectorFactory";
-
-  public static final String PROP_ACCEPT_QUEUE_SIZE = "acceptQueueSize";
-
-  public static final String PROP_ACCEPTOR_PRIORITY_DELTA = "acceptorPriorityDelta";
-
-  public static final String PROP_IDLE_TIMEOUT = "idleTimeout";
-
-  public static final String PROP_INHERIT_CHANNEL = "inheritChannel";
-
-  public static final String PROP_LINGER_TIME = "lingerTime";
-
-  public static final String PROP_NAME = "name";
-
-  public static final String PROP_REUSE_ADDRESS = "reuseAddress";
-
-  public static final String PROP_SELECTOR_PRIORITY_DELTA = "selectorPriorityDelta";
-
-  public static final String SERVICE_REF_CONNECTION_FACTORY_FACTORIES =
-      "connectionFactoryFactories";
 
   private ServerConnectorFactoryConstants() {
   }

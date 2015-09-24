@@ -21,7 +21,7 @@ package org.everit.jetty.server.component.ecm;
  */
 public final class HashSessionHandlerFactoryConstants {
 
-  public static final String FACTORY_PID =
+  public static final String SERVICE_FACTORY_PID =
       "org.everit.jetty.server.component.ecm.HashSessionHandlerFactory";
 
   private HashSessionHandlerFactoryConstants() {

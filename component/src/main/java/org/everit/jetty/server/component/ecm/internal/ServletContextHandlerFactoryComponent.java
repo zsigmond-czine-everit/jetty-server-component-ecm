@@ -76,7 +76,7 @@ import aQute.bnd.annotation.headers.ProvideCapability;
  */
 @ProvideCapability(ns = ECMExtenderConstants.CAPABILITY_NS_COMPONENT,
     value = ECMExtenderConstants.CAPABILITY_ATTR_CLASS + "=${@class}")
-@Component(componentId = ServletContextHandlerFactoryConstants.FACTORY_PID,
+@Component(componentId = ServletContextHandlerFactoryConstants.SERVICE_FACTORY_PID,
     configurationPolicy = ConfigurationPolicy.FACTORY,
     label = "Everit Jetty ServletContextHandler Factory",
     description = "ECM based component that can register one or more ServletContextHandlerFactory "
@@ -261,7 +261,7 @@ public class ServletContextHandlerFactoryComponent implements ServletContextHand
   }
 
   @ServiceRef(
-      referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_CONTEXT_ATTRIBUTE_LISTENERS,
+      referenceId = ServletContextHandlerFactoryConstants.ATTR_CONTEXT_ATTRIBUTE_LISTENERS,
       optional = true, attributePriority = PriorityConstants.PRIORITY_05,
       label = "ServletContextAttributeListeners (target)",
       description = "OSGi filter of zero or more ServletContextAttributeListener service that will "
@@ -271,7 +271,7 @@ public class ServletContextHandlerFactoryComponent implements ServletContextHand
     this.contextAttributeListeners = contextAttributeListeners;
   }
 
-  @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_CONTEXT_LISTENERS,
+  @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.ATTR_CONTEXT_LISTENERS,
       optional = true, attributePriority = PriorityConstants.PRIORITY_04,
       label = "ServletContextListeners (target)",
       description = "OSGi filter of zero or more ServletContextListener service that will be "
@@ -281,7 +281,7 @@ public class ServletContextHandlerFactoryComponent implements ServletContextHand
   }
 
   @ServiceRef(
-      referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_ERROR_HANDLER_FACTORY,
+      referenceId = ServletContextHandlerFactoryConstants.ATTR_ERROR_HANDLER_FACTORY,
       optional = true, attributePriority = PriorityConstants.PRIORITY_12,
       label = "ErrorHandler factory (target)",
       description = "OSGi service filter that selects the factory of the ErrorHandler that should "
@@ -290,7 +290,7 @@ public class ServletContextHandlerFactoryComponent implements ServletContextHand
     this.errorHandlerFactory = errorHandlerFactory;
   }
 
-  @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_FILTERS,
+  @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.ATTR_FILTERS,
       configurationType = ReferenceConfigurationType.CLAUSE, optional = true, dynamic = true,
       attributePriority = PriorityConstants.PRIORITY_03, label = "Filters (clause)",
       description = "Zero or more clauses to register filters within the Servlet Context. Possible "
@@ -318,7 +318,7 @@ public class ServletContextHandlerFactoryComponent implements ServletContextHand
     updateMaxFormKeys(maxFormKeys);
   }
 
-  @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_MIMETYPES,
+  @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.ATTR_MIMETYPES,
       optional = true, attributePriority = PriorityConstants.PRIORITY_13,
       label = "Mime types (target)",
       description = "The mime type object that can be used to resolve the mime type of a file.")
@@ -338,7 +338,7 @@ public class ServletContextHandlerFactoryComponent implements ServletContextHand
   }
 
   @ServiceRef(
-      referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_REQUEST_ATTRIBUTE_LISTENERS,
+      referenceId = ServletContextHandlerFactoryConstants.ATTR_REQUEST_ATTRIBUTE_LISTENERS,
       optional = true, attributePriority = PriorityConstants.PRIORITY_07,
       label = "ServletRequestAttributeListeners (target)",
       description = "OSGi filter of zero or more ServletRequestAttributeListener service that will "
@@ -348,7 +348,7 @@ public class ServletContextHandlerFactoryComponent implements ServletContextHand
     this.requestAttributeListeners = requestAttributeListeners;
   }
 
-  @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_REQUEST_LISTENERS,
+  @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.ATTR_REQUEST_LISTENERS,
       optional = true, attributePriority = PriorityConstants.PRIORITY_06,
       label = "ServletRequestListeners (target)",
       description = "OSGi filter of zero or more ServletRequestListener service that will be "
@@ -367,7 +367,7 @@ public class ServletContextHandlerFactoryComponent implements ServletContextHand
   }
 
   @ServiceRef(
-      referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_SECURITY_HANDLER_FACTORY,
+      referenceId = ServletContextHandlerFactoryConstants.ATTR_SECURITY_HANDLER_FACTORY,
       optional = true, attributePriority = PriorityConstants.PRIORITY_11,
       label = "SecurityHandler factory (target)",
       description = "OSGi service filter that selects the factory of the SecurityHandler that "
@@ -378,7 +378,7 @@ public class ServletContextHandlerFactoryComponent implements ServletContextHand
     this.securityHandlerFactory = securityHandlerFactory;
   }
 
-  @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_SERVLETS,
+  @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.ATTR_SERVLETS,
       configurationType = ReferenceConfigurationType.CLAUSE, optional = true, dynamic = true,
       attributePriority = PriorityConstants.PRIORITY_02, label = "Servlets (clause)",
       description = "Zero or more clauses to register servlets within the Servlet Context. "
@@ -391,7 +391,7 @@ public class ServletContextHandlerFactoryComponent implements ServletContextHand
   }
 
   @ServiceRef(
-      referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_SESSION_HANDLER_FACTORY,
+      referenceId = ServletContextHandlerFactoryConstants.ATTR_SESSION_HANDLER_FACTORY,
       optional = true, attributePriority = PriorityConstants.PRIORITY_09,
       label = "SessionHandler Factory (target)",
       description = "OSGi service filter that selects the factory of the session handler that "

@@ -35,7 +35,7 @@ import aQute.bnd.annotation.headers.ProvideCapability;
  * A very simple component that registers a {@link SecureRequestCustomizer} instance as an OSGi
  * service.
  */
-@Component(componentId = SecureRequestCustomizerConstants.FACTORY_PID,
+@Component(componentId = SecureRequestCustomizerConstants.SERVICE_FACTORY_PID,
     configurationPolicy = ConfigurationPolicy.IGNORE,
     label = "Everit Jetty Secure Request Customizer",
     description = "The component automatically registers a SecureRequestCustomizer OSGi service. "

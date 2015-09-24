@@ -20,18 +20,19 @@ package org.everit.jetty.server.component.ecm;
  */
 public final class JettyServerConstants {
 
+  public static final String ATTR_NETWORK_CONNECTOR_FACTORIES = "networkConnectorFactories";
+
+  public static final String ATTR_SERVLET_CONTEXT_HANDLER_FACTORIES =
+      "servletContextHandlerFactories";
+
   public static final String CONNECTOR_REF_CLAUSE_ATTR_HOST = "host";
 
   public static final String CONNECTOR_REF_CLAUSE_ATTR_PORT = "port";
 
   public static final String CONTEXT_CLAUSE_ATTR_CONTEXTPATH = "contextPath";
 
-  public static final String FACTORY_PID = "org.everit.jetty.server.component.ecm.JettyServer";
-
-  public static final String SERVICE_REF_NETWORK_CONNECTOR_FACTORIES = "networkConnectorFactories";
-
-  public static final String SERVICE_REF_SERVLET_CONTEXT_HANDLER_FACTORIES =
-      "servletContextHandlerFactories";
+  public static final String SERVICE_FACTORY_PID =
+      "org.everit.jetty.server.component.ecm.JettyServer";
 
   private JettyServerConstants() {
   }

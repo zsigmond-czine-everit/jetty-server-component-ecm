@@ -41,7 +41,7 @@ import aQute.bnd.annotation.headers.ProvideCapability;
  * Component that makes it possible to instantiate a pre-configured {@link ErrorPageErrorHandler}
  * and register it as an OSGi service.
  */
-@Component(componentId = ErrorPageErrorHandlerFactoryConstants.FACTORY_PID,
+@Component(componentId = ErrorPageErrorHandlerFactoryConstants.SERVICE_FACTORY_PID,
     configurationPolicy = ConfigurationPolicy.FACTORY,
     label = "Everit Jetty ErrorPage ErrorHandler Factory",
     description = "Configurable ErrorHandler Factory that forwards requests to error pages.")

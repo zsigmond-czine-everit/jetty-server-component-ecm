@@ -34,7 +34,7 @@ public final class ErrorPageErrorHandlerFactoryConstants {
 
   public static final boolean DEFAULT_SHOW_STACKS = true;
 
-  public static final String FACTORY_PID =
+  public static final String SERVICE_FACTORY_PID =
       "org.everit.jetty.server.component.ecm.ErrorPageErrorHandlerFactory";
 
   private ErrorPageErrorHandlerFactoryConstants() {

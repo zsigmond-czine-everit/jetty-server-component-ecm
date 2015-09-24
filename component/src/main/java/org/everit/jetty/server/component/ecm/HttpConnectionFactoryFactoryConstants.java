@@ -20,6 +20,8 @@ package org.everit.jetty.server.component.ecm;
  */
 public final class HttpConnectionFactoryFactoryConstants {
 
+  public static final String ATTR_CUSTOMIZERS = "customizers";
+
   public static final String ATTR_DELAY_DISPATCH_UNTIL_CONTENT = "delayDispatchUntilContent";
 
   public static final String ATTR_HEADER_CACHE_SIZE = "headerCacheSize";
@@ -64,10 +66,8 @@ public final class HttpConnectionFactoryFactoryConstants {
 
   public static final boolean DEFAULT_SEND_X_POWERED_BY = false;
 
-  public static final String FACTORY_PID =
+  public static final String SERVICE_FACTORY_PID =
       "org.everit.jetty.server.component.ecm.HttpConnectionFactoryFactory";
-
-  public static final String SERVICE_REF_CUSTOMIZERS = "customizers";
 
   private HttpConnectionFactoryFactoryConstants() {
   }

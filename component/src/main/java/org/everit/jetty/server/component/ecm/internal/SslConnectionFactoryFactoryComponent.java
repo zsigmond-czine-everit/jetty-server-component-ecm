@@ -41,7 +41,7 @@ import aQute.bnd.annotation.headers.ProvideCapability;
 /**
  * Component that can create {@link SslConnectionFactory} instances.
  */
-@Component(componentId = SslConnectionFactoryFactoryConstants.FACTORY_PID,
+@Component(componentId = SslConnectionFactoryFactoryConstants.SERVICE_FACTORY_PID,
     configurationPolicy = ConfigurationPolicy.FACTORY,
     label = "Everit Jetty SslConnectionFactory Factory",
     description = "Component to create SslConnectionFactory instances.")
@@ -135,7 +135,7 @@ public class SslConnectionFactoryFactoryComponent implements ConnectionFactoryFa
     this.keyManagerPassword = keyManagerPassword;
   }
 
-  @ServiceRef(referenceId = SslConnectionFactoryFactoryConstants.SERVICE_REF_KEYSTORE,
+  @ServiceRef(referenceId = SslConnectionFactoryFactoryConstants.ATTR_KEYSTORE,
       optional = true, attributePriority = PriorityConstants.PRIORITY_01,
       label = "KeyStore (target)",
       description = "Optional service filter expression of KeyStore OSGi service. If not specified,"
