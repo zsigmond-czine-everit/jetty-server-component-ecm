@@ -43,11 +43,14 @@ import aQute.bnd.annotation.headers.ProvideCapability;
  */
 @Component(componentId = SslConnectionFactoryFactoryConstants.FACTORY_PID,
     configurationPolicy = ConfigurationPolicy.FACTORY,
-    localizationBase = "OSGI-INF/metatype/sslConnectionFactoryFactory")
+    label = "Everit Jetty SslConnectionFactory Factory",
+    description = "Component to create SslConnectionFactory instances.")
 @ProvideCapability(ns = ECMExtenderConstants.CAPABILITY_NS_COMPONENT,
     value = ECMExtenderConstants.CAPABILITY_ATTR_CLASS + "=${@class}")
 @StringAttributes({
-    @StringAttribute(attributeId = Constants.SERVICE_DESCRIPTION, optional = true) })
+    @StringAttribute(attributeId = Constants.SERVICE_DESCRIPTION, optional = true,
+        label = "Service description",
+        description = "Optional description for the instantiated SslConnectionFactory Factory.") })
 @Service
 public class SslConnectionFactoryFactoryComponent implements ConnectionFactoryFactory {
 
@@ -107,7 +110,8 @@ public class SslConnectionFactoryFactoryComponent implements ConnectionFactoryFa
   }
 
   @StringAttribute(attributeId = SslConnectionFactoryFactoryConstants.ATTR_CERT_ALIAS,
-      optional = true, priority = PriorityConstants.PRIORITY_03)
+      optional = true, priority = PriorityConstants.PRIORITY_03, label = "Certificate alias",
+      description = "Alias of SSL certificate for the connector.")
   public void setCertAlias(final String certAlias) {
     this.certAlias = certAlias;
   }
@@ -117,26 +121,33 @@ public class SslConnectionFactoryFactoryComponent implements ConnectionFactoryFa
   }
 
   @StringAttribute(attributeId = SslConnectionFactoryFactoryConstants.ATTR_INCLUDE_PROTOCOLS,
-      optional = true, priority = PriorityConstants.PRIORITY_05)
+      optional = true, priority = PriorityConstants.PRIORITY_05, label = "Include protocols",
+      description = "The array of protocol names to include in "
+          + "SSLEngine.setEnabledProtocols(String [])")
   public void setIncludeProtocols(final String[] includeProtocols) {
     this.includeProtocols = includeProtocols;
   }
 
   @PasswordAttribute(attributeId = SslConnectionFactoryFactoryConstants.ATTR_KEY_MANAGER_PASSWORD,
-      optional = true, priority = PriorityConstants.PRIORITY_04)
+      optional = true, priority = PriorityConstants.PRIORITY_04, label = "Key manager password",
+      description = "The password (if any) for the specific key within the key store.")
   public void setKeyManagerPassword(final String keyManagerPassword) {
     this.keyManagerPassword = keyManagerPassword;
   }
 
   @ServiceRef(referenceId = SslConnectionFactoryFactoryConstants.SERVICE_REF_KEYSTORE,
-      optional = true, attributePriority = PriorityConstants.PRIORITY_01)
+      optional = true, attributePriority = PriorityConstants.PRIORITY_01,
+      label = "KeyStore (target)",
+      description = "Optional service filter expression of KeyStore OSGi service. If not specified,"
+          + " the default developer certificate is used.")
   public void setKeyStore(final KeyStore keyStore) {
     this.keyStore = keyStore;
   }
 
   @PasswordAttribute(attributeId = SslConnectionFactoryFactoryConstants.ATTR_KEYSTORE_PASSWORD,
       defaultValue = SslConnectionFactoryFactoryConstants.DEFAULT_KEYSTORE_PASSWORD,
-      priority = PriorityConstants.PRIORITY_02)
+      priority = PriorityConstants.PRIORITY_02, label = "KeyStore password",
+      description = "The password for the key store.")
   public void setKeyStorePassword(final String keyStorePassword) {
     this.keyStorePassword = keyStorePassword;
   }

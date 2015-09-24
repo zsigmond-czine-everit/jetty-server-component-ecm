@@ -43,10 +43,14 @@ import aQute.bnd.annotation.headers.ProvideCapability;
  */
 @Component(componentId = ErrorPageErrorHandlerFactoryConstants.FACTORY_PID,
     configurationPolicy = ConfigurationPolicy.FACTORY,
-    localizationBase = "OSGI-INF/metatype/errorPageErrorHandlerFactory")
+    label = "Everit Jetty ErrorPage ErrorHandler Factory",
+    description = "Configurable ErrorHandler Factory that forwards requests to error pages.")
 @ProvideCapability(ns = ECMExtenderConstants.CAPABILITY_NS_COMPONENT,
     value = ECMExtenderConstants.CAPABILITY_ATTR_CLASS + "=${@class}")
-@StringAttributes(@StringAttribute(attributeId = Constants.SERVICE_DESCRIPTION, optional = true))
+@StringAttributes({
+    @StringAttribute(attributeId = Constants.SERVICE_DESCRIPTION, optional = true,
+        label = "Service description",
+        description = "Optional description for Error Page Handler.") })
 @Service
 public class ErrorPageErrorHandlerFactoryComponent implements ErrorHandlerFactory {
 
@@ -95,7 +99,8 @@ public class ErrorPageErrorHandlerFactoryComponent implements ErrorHandlerFactor
 
   @StringAttribute(attributeId = ErrorPageErrorHandlerFactoryConstants.ATTR_CACHE_CONTROL,
       defaultValue = ErrorPageErrorHandlerFactoryConstants.DEFAULT_CACHE_CONTROL,
-      priority = PriorityConstants.PRIORITY_02)
+      priority = PriorityConstants.PRIORITY_02, label = "Cache control",
+      description = "The cacheControl header to set on error responses.")
   public void setCacheControl(final String cacheControl) {
     this.cacheControl = cacheControl;
   }
@@ -107,7 +112,11 @@ public class ErrorPageErrorHandlerFactoryComponent implements ErrorHandlerFactor
    *          The error pages mappings in properties file like format.
    */
   @StringAttribute(attributeId = ErrorPageErrorHandlerFactoryConstants.ATTR_ERROR_PAGES,
-      optional = true, priority = PriorityConstants.PRIORITY_01)
+      optional = true, priority = PriorityConstants.PRIORITY_01, label = "Error pages",
+      description = "Mappings of error pages. The left side of the mapping is either a code, code "
+          + "range in x-y format or the name of an exception. The right side is the URI where the "
+          + "request should be forwarded in case of the error. Examples: 404=/notfound.html, "
+          + "500-599=/serverError.html, java.lang.NumberFormatException=/numberformat.html.")
   public void setErrorPages(final String[] errorPageMappings) {
     if (errorPageMappings == null) {
       return;
@@ -149,14 +158,16 @@ public class ErrorPageErrorHandlerFactoryComponent implements ErrorHandlerFactor
 
   @BooleanAttribute(attributeId = ErrorPageErrorHandlerFactoryConstants.ATTR_SHOW_MESSAGE_IN_TITLE,
       defaultValue = ErrorPageErrorHandlerFactoryConstants.DEFAULT_SHOW_MESSAGE_IN_TITLE,
-      priority = PriorityConstants.PRIORITY_03)
+      priority = PriorityConstants.PRIORITY_03, label = "Show message in title",
+      description = "If true, the error message appears in page title.")
   public void setShowMessageInTitle(final boolean showMessageInTitle) {
     this.showMessageInTitle = showMessageInTitle;
   }
 
   @BooleanAttribute(attributeId = ErrorPageErrorHandlerFactoryConstants.ATTR_SHOW_STACKS,
       defaultValue = ErrorPageErrorHandlerFactoryConstants.DEFAULT_SHOW_STACKS,
-      priority = PriorityConstants.PRIORITY_05)
+      priority = PriorityConstants.PRIORITY_05, label = "Show stacks",
+      description = "Whether to show stack traces in the error pages or not.")
   public void setShowStacks(final boolean showStacks) {
     this.showStacks = showStacks;
   }

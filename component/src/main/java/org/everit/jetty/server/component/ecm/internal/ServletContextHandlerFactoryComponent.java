@@ -78,8 +78,13 @@ import aQute.bnd.annotation.headers.ProvideCapability;
     value = ECMExtenderConstants.CAPABILITY_ATTR_CLASS + "=${@class}")
 @Component(componentId = ServletContextHandlerFactoryConstants.FACTORY_PID,
     configurationPolicy = ConfigurationPolicy.FACTORY,
-    localizationBase = "OSGI-INF/metatype/servletContextHandlerFactory")
-@StringAttributes(@StringAttribute(attributeId = Constants.SERVICE_DESCRIPTION, optional = true))
+    label = "Everit Jetty ServletContextHandler Factory",
+    description = "ECM based component that can register one or more ServletContextHandlerFactory "
+        + "instances.")
+@StringAttributes({
+    @StringAttribute(attributeId = Constants.SERVICE_DESCRIPTION, optional = true,
+        label = "Service description",
+        description = "Optional description for ServletContextHandlerFactory service.") })
 @Service(ServletContextHandlerFactory.class)
 public class ServletContextHandlerFactoryComponent implements ServletContextHandlerFactory {
 
@@ -257,47 +262,66 @@ public class ServletContextHandlerFactoryComponent implements ServletContextHand
 
   @ServiceRef(
       referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_CONTEXT_ATTRIBUTE_LISTENERS,
-      optional = true, attributePriority = PriorityConstants.PRIORITY_05)
+      optional = true, attributePriority = PriorityConstants.PRIORITY_05,
+      label = "ServletContextAttributeListeners (target)",
+      description = "OSGi filter of zero or more ServletContextAttributeListener service that will "
+          + "be registered in the ServletContext.")
   public void setContextAttributeListeners(
       final ServletContextAttributeListener[] contextAttributeListeners) {
     this.contextAttributeListeners = contextAttributeListeners;
   }
 
   @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_CONTEXT_LISTENERS,
-      optional = true, attributePriority = PriorityConstants.PRIORITY_04)
+      optional = true, attributePriority = PriorityConstants.PRIORITY_04,
+      label = "ServletContextListeners (target)",
+      description = "OSGi filter of zero or more ServletContextListener service that will be "
+          + "registered in the ServletContext.")
   public void setContextListeners(final ServletContextListener[] contextListeners) {
     this.contextListeners = contextListeners;
   }
 
   @ServiceRef(
       referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_ERROR_HANDLER_FACTORY,
-      optional = true, attributePriority = PriorityConstants.PRIORITY_12)
+      optional = true, attributePriority = PriorityConstants.PRIORITY_12,
+      label = "ErrorHandler factory (target)",
+      description = "OSGi service filter that selects the factory of the ErrorHandler that should "
+          + "be used in the servlet context. This attribute is optional.")
   public void setErrorHandlerFactory(final ErrorHandlerFactory errorHandlerFactory) {
     this.errorHandlerFactory = errorHandlerFactory;
   }
 
   @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_FILTERS,
       configurationType = ReferenceConfigurationType.CLAUSE, optional = true, dynamic = true,
-      attributePriority = PriorityConstants.PRIORITY_03)
+      attributePriority = PriorityConstants.PRIORITY_03, label = "Filters (clause)",
+      description = "Zero or more clauses to register filters within the Servlet Context. Possible "
+          + "attributes are: url-pattern, servlet-name, dispatcher, init-*. E.g.: myFilter;"
+          + "url-pattern=\"/a,/b/c\";servlet-name=\"myServlet,myOtherServlet\","
+          + "dispatcher=\"REQUEST,ASYNC\";filter:=(service.pid=...)")
   public synchronized void setFilters(final ServiceHolder<Filter>[] filters) {
     filterKeys = resolveHolderKeys(filters);
     filterMappingKeys = resolveFilterMappingKeys(filters);
   }
 
   @IntegerAttribute(attributeId = ServletContextHandlerFactoryConstants.ATTR_MAX_FORM_CONTENT_SIZE,
-      defaultValue = -1, priority = PriorityConstants.PRIORITY_14)
+      defaultValue = -1, priority = PriorityConstants.PRIORITY_14, label = "Max. form content size",
+      description = "The maximum size of a form post, to protect against DOS attacks from large "
+          + "forms.")
   public void setMaxFormContentSize(final int maxFormContentSize) {
     updateMaxFormContentSize(maxFormContentSize);
   }
 
   @IntegerAttribute(attributeId = ServletContextHandlerFactoryConstants.ATTR_MAX_FORM_KEYS,
-      defaultValue = -1, priority = PriorityConstants.PRIORITY_15)
+      defaultValue = -1, priority = PriorityConstants.PRIORITY_15, label = "Max. form keys",
+      description = "The maximum number of form Keys to protect against DOS attack from crafted "
+          + "hash keys.")
   public void setMaxFormKeys(final int maxFormKeys) {
     updateMaxFormKeys(maxFormKeys);
   }
 
   @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_MIMETYPES,
-      optional = true, attributePriority = PriorityConstants.PRIORITY_13)
+      optional = true, attributePriority = PriorityConstants.PRIORITY_13,
+      label = "Mime types (target)",
+      description = "The mime type object that can be used to resolve the mime type of a file.")
   public void setMimeTypes(final MimeTypes mimeTypes) {
     updateMimeTypes(mimeTypes);
   }
@@ -315,34 +339,52 @@ public class ServletContextHandlerFactoryComponent implements ServletContextHand
 
   @ServiceRef(
       referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_REQUEST_ATTRIBUTE_LISTENERS,
-      optional = true, attributePriority = PriorityConstants.PRIORITY_07)
+      optional = true, attributePriority = PriorityConstants.PRIORITY_07,
+      label = "ServletRequestAttributeListeners (target)",
+      description = "OSGi filter of zero or more ServletRequestAttributeListener service that will "
+          + "be registered in the ServletContext.")
   public void setRequestAttributeListeners(
       final ServletRequestAttributeListener[] requestAttributeListeners) {
     this.requestAttributeListeners = requestAttributeListeners;
   }
 
   @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_REQUEST_LISTENERS,
-      optional = true, attributePriority = PriorityConstants.PRIORITY_06)
+      optional = true, attributePriority = PriorityConstants.PRIORITY_06,
+      label = "ServletRequestListeners (target)",
+      description = "OSGi filter of zero or more ServletRequestListener service that will be "
+          + "registered in the ServletContext.")
   public void setRequestListeners(final ServletRequestListener[] requestListeners) {
     this.requestListeners = requestListeners;
   }
 
   @BooleanAttribute(attributeId = ServletContextHandlerFactoryConstants.ATTR_SECURITY,
-      defaultValue = false, priority = PriorityConstants.PRIORITY_10)
+      defaultValue = false, priority = PriorityConstants.PRIORITY_10, label = "Security",
+      description = "In case the security property is set to true and no securityHandlerFactory "
+          + "reference is defined, a constraint based security manager with default values will "
+          + "be used.")
   public void setSecurity(final boolean security) {
     this.security = security;
   }
 
   @ServiceRef(
       referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_SECURITY_HANDLER_FACTORY,
-      optional = true, attributePriority = PriorityConstants.PRIORITY_11)
+      optional = true, attributePriority = PriorityConstants.PRIORITY_11,
+      label = "SecurityHandler factory (target)",
+      description = "OSGi service filter that selects the factory of the SecurityHandler that "
+          + "should be used in the servlet context. This attribute is optional. In case it is not "
+          + "defined, a constraint based security handler will be started if the security property "
+          + "is set to true.")
   public void setSecurityHandlerFactory(final SecurityHandlerFactory securityHandlerFactory) {
     this.securityHandlerFactory = securityHandlerFactory;
   }
 
   @ServiceRef(referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_SERVLETS,
       configurationType = ReferenceConfigurationType.CLAUSE, optional = true, dynamic = true,
-      attributePriority = PriorityConstants.PRIORITY_02)
+      attributePriority = PriorityConstants.PRIORITY_02, label = "Servlets (clause)",
+      description = "Zero or more clauses to register servlets within the Servlet Context. "
+          + "Possible attributes are: url-pattern, init-*. E.g.: myFilter;url-pattern=\"/a,/b/c\";"
+          + "filter:=(service.pid=...). The OSGi service that implements the Servlet interface can "
+          + "contain the \"async-supported\" service property.")
   public void setServlets(final ServiceHolder<Servlet>[] servlets) {
     servletKeys = resolveHolderKeys(servlets);
     servletMappingKeys = resolveServletMappingKeys(servlets);
@@ -350,19 +392,33 @@ public class ServletContextHandlerFactoryComponent implements ServletContextHand
 
   @ServiceRef(
       referenceId = ServletContextHandlerFactoryConstants.SERVICE_REF_SESSION_HANDLER_FACTORY,
-      optional = true, attributePriority = PriorityConstants.PRIORITY_09)
+      optional = true, attributePriority = PriorityConstants.PRIORITY_09,
+      label = "SessionHandler Factory (target)",
+      description = "OSGi service filter that selects the factory of the session handler that "
+          + "should be used in the servlet context. This attribute is optional. In case it is not "
+          + "defined, a hash based session handler will be started if the sessions property is set "
+          + "to true.")
   public void setSessionHandlerFactory(final SessionHandlerFactory sessionHandlerFactory) {
     this.sessionHandlerFactory = sessionHandlerFactory;
   }
 
   @BooleanAttribute(attributeId = ServletContextHandlerFactoryConstants.ATTR_SESSIONS,
-      defaultValue = true, priority = PriorityConstants.PRIORITY_08)
+      defaultValue = true, priority = PriorityConstants.PRIORITY_08, label = "Sessions",
+      description = "In case the sessions property is set to true and no sessionManagerFactory "
+          + "reference is defined, a hash based session manager will be used with default "
+          + "settings.")
   public void setSessions(final boolean sessions) {
     this.sessions = sessions;
   }
 
   @StringAttribute(attributeId = ServletContextHandlerFactoryConstants.ATTR_VIRTUAL_HOSTS,
-      optional = true, multiple = ThreeStateBoolean.TRUE, priority = PriorityConstants.PRIORITY_01)
+      optional = true, multiple = ThreeStateBoolean.TRUE, priority = PriorityConstants.PRIORITY_01,
+      label = "Virtual hosts",
+      description = "Array of virtual hosts that this context responds to. A null host name or "
+          + "null/empty array means any hostname is acceptable. Host names may be String "
+          + "representation of IP addresses. Host names may start with '*.' to wildcard one level "
+          + "of names.  Hosts may start with '@', in which case they will match the "
+          + "Connector#getName()} for the request.")
   public void setVirtualHosts(final String[] virtualHosts) {
     updateVirtualHosts(virtualHosts);
   }

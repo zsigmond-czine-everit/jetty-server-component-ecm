@@ -56,10 +56,15 @@ import aQute.bnd.annotation.headers.ProvideCapability;
  */
 @Component(componentId = JettyServerConstants.FACTORY_PID,
     configurationPolicy = ConfigurationPolicy.FACTORY,
-    localizationBase = "OSGI-INF/metatype/jettyServer")
+    label = "Everit Jetty Server",
+    description = "Configurable component that can start Jetty server instances. In case a Jetty "
+        + "server is started, the server instance is registered as an OSGi service.")
 @ProvideCapability(ns = ECMExtenderConstants.CAPABILITY_NS_COMPONENT,
     value = ECMExtenderConstants.CAPABILITY_ATTR_CLASS + "=${@class}")
-@StringAttributes(@StringAttribute(attributeId = Constants.SERVICE_DESCRIPTION, optional = true))
+@StringAttributes({
+    @StringAttribute(attributeId = Constants.SERVICE_DESCRIPTION, optional = true,
+        label = "Service description",
+        description = "Optional description for the instantiated Jetty server.") })
 public class JettyServerComponent {
 
   /**
@@ -373,7 +378,10 @@ public class JettyServerComponent {
 
   @ServiceRef(referenceId = JettyServerConstants.SERVICE_REF_NETWORK_CONNECTOR_FACTORIES,
       configurationType = ReferenceConfigurationType.CLAUSE, optional = false, dynamic = true,
-      attributePriority = PriorityConstants.PRIORITY_01)
+      attributePriority = PriorityConstants.PRIORITY_01,
+      label = "NetworkConnector Factories (clause)",
+      description = "Zero or more clauses to install Network Connectors based on their factory "
+          + "services. Supported attributes: host, port.")
   public void setNetworkConnectorFactories(
       final ServiceHolder<NetworkConnectorFactory>[] networkConnectorFactories) {
     updateConnectorFactories(networkConnectorFactories);
@@ -381,7 +389,10 @@ public class JettyServerComponent {
 
   @ServiceRef(referenceId = JettyServerConstants.SERVICE_REF_SERVLET_CONTEXT_HANDLER_FACTORIES,
       configurationType = ReferenceConfigurationType.CLAUSE, dynamic = true,
-      attributePriority = PriorityConstants.PRIORITY_02)
+      attributePriority = PriorityConstants.PRIORITY_02,
+      label = "ServletContextHandler Factories (clause)",
+      description = "Zero or more clauses to install Servlet Contexts based on their factory "
+          + "services. Supported attributes: contextPath")
   public void setServletContextHandlerFactories(
       final ServiceHolder<ServletContextHandlerFactory>[] servletContextHandlerFactories) {
     updateServletContextAndHandleFailure(servletContextHandlerFactories);

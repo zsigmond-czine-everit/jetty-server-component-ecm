@@ -37,7 +37,11 @@ import aQute.bnd.annotation.headers.ProvideCapability;
  */
 @Component(componentId = SecureRequestCustomizerConstants.FACTORY_PID,
     configurationPolicy = ConfigurationPolicy.IGNORE,
-    localizationBase = "OSGI-INF/metatype/secureRequestCustomizer")
+    label = "Everit Jetty Secure Request Customizer",
+    description = "The component automatically registers a SecureRequestCustomizer OSGi service. "
+        + "Customizer that extracts the attribute from an SSLContext and sets them on the request "
+        + "with ServletRequest.setAttribute(String, Object) according to Servlet Specification "
+        + "Requirements.")
 @ProvideCapability(ns = ECMExtenderConstants.CAPABILITY_NS_COMPONENT,
     value = ECMExtenderConstants.CAPABILITY_ATTR_CLASS + "=${@class}")
 public class SecureRequestCustomizerComponent {
